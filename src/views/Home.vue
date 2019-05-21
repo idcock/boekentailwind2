@@ -12,9 +12,22 @@
       itemKey="_id"
     >
       <template v-slot:titel-knop>
-        <button class="border-2 rounded p-2 hover:bg-blue-600">
+        <button
+          @click="nieuwBoek"
+          class="border-2 rounded p-2 hover:bg-blue-600"
+        >
           Nieuw boek
         </button>
+      </template>
+      <template v-slot:acties>
+        <td>
+          <i @click="wijzigBoek" class="material-icons cursor-pointer">
+            edit
+          </i>
+          <i @click="verwijderBoek" class="material-icons cursor-pointer">
+            delete
+          </i>
+        </td>
       </template>
     </data-tabel>
   </div>
@@ -53,6 +66,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    nieuwBoek() {},
+    wijzigBoek() {},
+    verwijderBoek() {}
   },
   async created() {
     // Data ophalen van server

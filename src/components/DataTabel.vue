@@ -53,6 +53,7 @@
         <td class="p-2" v-for="kolom of kolommen" :key="kolom.veld">
           {{ getWaardeViaVeld(item, kolom.veld) }}
         </td>
+        <slot name="acties"></slot>
       </tr>
     </tbody>
     <tfoot>
@@ -131,15 +132,25 @@ export default {
       if (!this.zoekterm) return this.items;
 
       return this.items.filter(item => {
-        let gevonden = false;
-        this.kolommen.forEach(kolom => {
-          if (kolom.zoekbaar && !gevonden) {
-            gevonden = this.getWaardeViaVeld(item, kolom.veld)
+        //let gevonden = false;
+        //this.kolommen.forEach(kolom => {
+        //   if (kolom.zoekbaar && !gevonden) {
+        //     gevonden = this.getWaardeViaVeld(item, kolom.veld)
+        //       .toLowerCase()
+        //       .includes(this.zoekterm.toLowerCase());
+        //   }
+        // });
+        // return gevonden;
+        for (const kolom of this.kolommen.filter(kolom => kolom.zoekbaar)) {
+          if (
+            this.getWaardeViaVeld(item, kolom.veld)
               .toLowerCase()
-              .includes(this.zoekterm.toLowerCase());
+              .includes(this.zoekterm.toLowerCase())
+          ) {
+            return true;
           }
-        });
-        return gevonden;
+        }
+        return false;
       });
     },
 

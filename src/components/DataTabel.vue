@@ -53,7 +53,7 @@
         <td class="p-2" v-for="kolom of kolommen" :key="kolom.veld">
           {{ getWaardeViaVeld(item, kolom.veld) }}
         </td>
-        <slot name="acties"></slot>
+        <slot name="acties" :item="item"></slot>
       </tr>
     </tbody>
     <tfoot>
